@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620" font-family="Segoe UI, Arial, sans-serif">
+
+  <!-- Background -->
+  <rect width="1200" height="620" fill="#0f1117"/>
+
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e2130" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="ingestGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1a4a6c;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="queryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2d1b4e;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#3d2560;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4fc3f7"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="620" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="600" y="52" text-anchor="middle" font-size="30" font-weight="700" fill="url(#titleGrad)" filter="url(#glow)">RAG Domain Q&amp;A Assistant</text>
+  <text x="600" y="78" text-anchor="middle" font-size="14" fill="#8892a4">Retrieval-Augmented Generation · OpenAI Embeddings · Semantic Retrieval · Grounded Answer Generation</text>
+
+  <!-- Divider -->
+  <line x1="60" y1="92" x2="1140" y2="92" stroke="#2a2f45" stroke-width="1"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- INGESTION FLOW LANE -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <!-- Lane background -->
+  <rect x="30" y="105" width="1140" height="195" rx="12" fill="#0d1b2a" stroke="#1e3a5f" stroke-width="1.5"/>
+
+  <!-- Lane label -->
+  <rect x="30" y="105" width="160" height="32" rx="8" fill="#1a3a5c"/>
+  <text x="110" y="126" text-anchor="middle" font-size="12" font-weight="600" fill="#4fc3f7">INGESTION FLOW</text>
+
+  <!-- === Box 1: Documents === -->
+  <rect x="60" y="152" width="140" height="110" rx="10" fill="url(#ingestGrad)" stroke="#4fc3f7" stroke-width="1.5"/>
+  <text x="130" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#4fc3f7">DOCUMENTS</text>
+  <!-- doc icons -->
+  <rect x="85" y="185" width="28" height="34" rx="3" fill="#0f1f35" stroke="#4fc3f7" stroke-width="1"/>
+  <line x1="90" y1="193" x2="108" y2="193" stroke="#4fc3f7" stroke-width="1"/>
+  <line x1="90" y1="199" x2="108" y2="199" stroke="#4fc3f7" stroke-width="1"/>
+  <line x1="90" y1="205" x2="102" y2="205" stroke="#4fc3f7" stroke-width="1"/>
+  <rect x="118" y="188" width="28" height="34" rx="3" fill="#0f1f35" stroke="#4fc3f7" stroke-width="1"/>
+  <line x1="123" y1="196" x2="141" y2="196" stroke="#4fc3f7" stroke-width="1"/>
+  <line x1="123" y1="202" x2="141" y2="202" stroke="#4fc3f7" stroke-width="1"/>
+  <line x1="123" y1="208" x2="133" y2="208" stroke="#4fc3f7" stroke-width="1"/>
+  <text x="130" y="238" text-anchor="middle" font-size="9.5" fill="#8ab8d4">7 domain .txt files</text>
+  <text x="130" y="250" text-anchor="middle" font-size="9.5" fill="#8ab8d4">AI · Biotech · Climate</text>
+  <text x="130" y="262" text-anchor="middle" font-size="9.5" fill="#8ab8d4">Quantum · Space · Energy</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="200" y1="207" x2="238" y2="207" stroke="#4fc3f7" stroke-width="2"/>
+  <polygon points="238,202 248,207 238,212" fill="#4fc3f7"/>
+
+  <!-- === Box 2: Chunking === -->
+  <rect x="248" y="152" width="140" height="110" rx="10" fill="url(#ingestGrad)" stroke="#4fc3f7" stroke-width="1.5"/>
+  <text x="318" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#4fc3f7">CHUNKING</text>
+  <!-- chunk visual -->
+  <rect x="275" y="185" width="86" height="14" rx="3" fill="#4fc3f7" opacity="0.8"/>
+  <rect x="275" y="203" width="86" height="14" rx="3" fill="#4fc3f7" opacity="0.6"/>
+  <rect x="275" y="221" width="86" height="14" rx="3" fill="#4fc3f7" opacity="0.4"/>
+  <text x="275" y="247" text-anchor="start" font-size="9.5" fill="#8ab8d4">500 char chunks</text>
+  <text x="275" y="259" text-anchor="start" font-size="9.5" fill="#8ab8d4">50 char overlap</text>
+  <text x="275" y="271" text-anchor="start" font-size="9.5" fill="#8ab8d4">Recursive splitter</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="388" y1="207" x2="426" y2="207" stroke="#4fc3f7" stroke-width="2"/>
+  <polygon points="426,202 436,207 426,212" fill="#4fc3f7"/>
+
+  <!-- === Box 3: Embeddings === -->
+  <rect x="436" y="152" width="140" height="110" rx="10" fill="url(#ingestGrad)" stroke="#4fc3f7" stroke-width="1.5"/>
+  <text x="506" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#4fc3f7">EMBEDDING</text>
+  <!-- vector dots visual -->
+  <circle cx="475" cy="200" r="4" fill="#4fc3f7" opacity="0.9"/>
+  <circle cx="490" cy="210" r="4" fill="#4fc3f7" opacity="0.7"/>
+  <circle cx="505" cy="195" r="4" fill="#4fc3f7" opacity="0.8"/>
+  <circle cx="520" cy="215" r="4" fill="#4fc3f7" opacity="0.6"/>
+  <circle cx="535" cy="200" r="4" fill="#4fc3f7" opacity="0.9"/>
+  <line x1="475" y1="200" x2="490" y2="210" stroke="#4fc3f7" stroke-width="1" opacity="0.5"/>
+  <line x1="490" y1="210" x2="505" y2="195" stroke="#4fc3f7" stroke-width="1" opacity="0.5"/>
+  <line x1="505" y1="195" x2="520" y2="215" stroke="#4fc3f7" stroke-width="1" opacity="0.5"/>
+  <line x1="520" y1="215" x2="535" y2="200" stroke="#4fc3f7" stroke-width="1" opacity="0.5"/>
+  <text x="506" y="240" text-anchor="middle" font-size="9.5" fill="#8ab8d4">text-embedding-3-small</text>
+  <text x="506" y="252" text-anchor="middle" font-size="9.5" fill="#8ab8d4">1536-dim dense vectors</text>
+  <text x="506" y="264" text-anchor="middle" font-size="9.5" fill="#8ab8d4">Float32 NumPy matrix</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="576" y1="207" x2="614" y2="207" stroke="#4fc3f7" stroke-width="2"/>
+  <polygon points="614,202 624,207 614,212" fill="#4fc3f7"/>
+
+  <!-- === Box 4: Vector Store === -->
+  <rect x="624" y="152" width="140" height="110" rx="10" fill="url(#ingestGrad)" stroke="#4fc3f7" stroke-width="1.5"/>
+  <text x="694" y="178" text-anchor="middle" font-size="11" font-weight="700" fill="#4fc3f7">VECTOR STORE</text>
+  <!-- cylinder icon -->
+  <ellipse cx="694" cy="196" rx="30" ry="8" fill="#0f1f35" stroke="#4fc3f7" stroke-width="1.2"/>
+  <rect x="664" y="196" width="60" height="28" fill="#0f1f35" stroke="#4fc3f7" stroke-width="1.2"/>
+  <ellipse cx="694" cy="224" rx="30" ry="8" fill="#0f1f35" stroke="#4fc3f7" stroke-width="1.2"/>
+  <text x="694" y="214" text-anchor="middle" font-size="9" fill="#4fc3f7">vectors</text>
+  <text x="694" y="248" text-anchor="middle" font-size="9.5" fill="#8ab8d4">In-memory index</text>
+  <text x="694" y="260" text-anchor="middle" font-size="9.5" fill="#8ab8d4">chunks · metadata</text>
+  <text x="694" y="272" text-anchor="middle" font-size="9.5" fill="#8ab8d4">IDs · embeddings</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- QUERY FLOW LANE -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <!-- Lane background -->
+  <rect x="30" y="325" width="1140" height="195" rx="12" fill="#150d2a" stroke="#5b21b6" stroke-width="1.5"/>
+
+  <!-- Lane label -->
+  <rect x="30" y="325" width="140" height="32" rx="8" fill="#2d1b4e"/>
+  <text x="100" y="346" text-anchor="middle" font-size="12" font-weight="600" fill="#a78bfa">QUERY FLOW</text>
+
+  <!-- === Box A: User Query === -->
+  <rect x="60" y="372" width="140" height="110" rx="10" fill="url(#queryGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="130" y="398" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa">USER QUERY</text>
+  <!-- speech bubble icon -->
+  <rect x="88" y="405" width="84" height="44" rx="8" fill="#1a0f35" stroke="#a78bfa" stroke-width="1"/>
+  <polygon points="105,449 98,462 118,449" fill="#1a0f35" stroke="#a78bfa" stroke-width="1"/>
+  <text x="130" y="423" text-anchor="middle" font-size="8.5" fill="#c4b5fd">"What is machine</text>
+  <text x="130" y="435" text-anchor="middle" font-size="8.5" fill="#c4b5fd">learning?"</text>
+  <text x="130" y="472" text-anchor="middle" font-size="9.5" fill="#9b8ac4">Natural language</text>
+  <text x="130" y="484" text-anchor="middle" font-size="9.5" fill="#9b8ac4">question input</text>
+
+  <!-- Arrow A→B -->
+  <line x1="200" y1="427" x2="238" y2="427" stroke="#a78bfa" stroke-width="2"/>
+  <polygon points="238,422 248,427 238,432" fill="#a78bfa"/>
+
+  <!-- === Box B: Query Embed === -->
+  <rect x="248" y="372" width="140" height="110" rx="10" fill="url(#queryGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="318" y="398" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa">QUERY EMBED</text>
+  <!-- wave icon -->
+  <path d="M278 420 Q290 410 302 420 Q314 430 326 420 Q338 410 350 420" fill="none" stroke="#a78bfa" stroke-width="2"/>
+  <path d="M278 432 Q290 422 302 432 Q314 442 326 432 Q338 422 350 432" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0.6"/>
+  <text x="318" y="458" text-anchor="middle" font-size="9.5" fill="#9b8ac4">Same embedding</text>
+  <text x="318" y="470" text-anchor="middle" font-size="9.5" fill="#9b8ac4">model &amp; vector space</text>
+  <text x="318" y="482" text-anchor="middle" font-size="9.5" fill="#9b8ac4">as documents</text>
+
+  <!-- Arrow B→C -->
+  <line x1="388" y1="427" x2="426" y2="427" stroke="#a78bfa" stroke-width="2"/>
+  <polygon points="426,422 436,427 426,432" fill="#a78bfa"/>
+
+  <!-- === Box C: Cosine Retrieval === -->
+  <rect x="436" y="372" width="140" height="110" rx="10" fill="url(#queryGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="506" y="394" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa">RETRIEVAL</text>
+  <text x="506" y="408" text-anchor="middle" font-size="9" fill="#a78bfa">Cosine Similarity</text>
+  <!-- similarity bars -->
+  <rect x="458" y="416" width="70" height="9" rx="3" fill="#a78bfa" opacity="0.9"/>
+  <rect x="458" y="429" width="52" height="9" rx="3" fill="#a78bfa" opacity="0.65"/>
+  <rect x="458" y="442" width="38" height="9" rx="3" fill="#a78bfa" opacity="0.4"/>
+  <text x="533" y="424" font-size="9" fill="#c4b5fd">0.91</text>
+  <text x="533" y="437" font-size="9" fill="#c4b5fd">0.78</text>
+  <text x="533" y="450" font-size="9" fill="#c4b5fd">0.65</text>
+  <text x="506" y="470" text-anchor="middle" font-size="9.5" fill="#9b8ac4">Top-k=3 chunks</text>
+  <text x="506" y="482" text-anchor="middle" font-size="9.5" fill="#9b8ac4">ranked by similarity</text>
+
+  <!-- Arrow C→D -->
+  <line x1="576" y1="427" x2="614" y2="427" stroke="#a78bfa" stroke-width="2"/>
+  <polygon points="614,422 624,427 614,432" fill="#a78bfa"/>
+
+  <!-- === Box D: LLM Generation === -->
+  <rect x="624" y="372" width="140" height="110" rx="10" fill="url(#queryGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="694" y="398" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa">LLM GENERATION</text>
+  <!-- brain/chip icon -->
+  <rect x="664" y="407" width="60" height="40" rx="6" fill="#1a0f35" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="664" y1="419" x2="656" y2="419" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="664" y1="429" x2="656" y2="429" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="724" y1="419" x2="732" y2="419" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="724" y1="429" x2="732" y2="429" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="676" y1="407" x2="676" y2="399" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="694" y1="407" x2="694" y2="399" stroke="#a78bfa" stroke-width="1.2"/>
+  <line x1="712" y1="407" x2="712" y2="399" stroke="#a78bfa" stroke-width="1.2"/>
+  <text x="694" y="425" text-anchor="middle" font-size="9" fill="#a78bfa">gpt-4o-mini</text>
+  <text x="694" y="436" text-anchor="middle" font-size="8.5" fill="#9b8ac4">temp=0.2</text>
+  <text x="694" y="460" text-anchor="middle" font-size="9.5" fill="#9b8ac4">Grounded prompt</text>
+  <text x="694" y="472" text-anchor="middle" font-size="9.5" fill="#9b8ac4">Context + Question</text>
+  <text x="694" y="484" text-anchor="middle" font-size="9.5" fill="#9b8ac4">→ Answer</text>
+
+  <!-- Arrow D→E -->
+  <line x1="764" y1="427" x2="802" y2="427" stroke="#a78bfa" stroke-width="2"/>
+  <polygon points="802,422 812,427 802,432" fill="#a78bfa"/>
+
+  <!-- === Box E: Answer + Sources === -->
+  <rect x="812" y="372" width="140" height="110" rx="10" fill="url(#queryGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="882" y="398" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa">ANSWER</text>
+  <!-- answer lines -->
+  <rect x="832" y="407" width="100" height="8" rx="2" fill="#a78bfa" opacity="0.7"/>
+  <rect x="832" y="419" width="88" height="8" rx="2" fill="#a78bfa" opacity="0.5"/>
+  <rect x="832" y="431" width="76" height="8" rx="2" fill="#a78bfa" opacity="0.35"/>
+  <!-- source badge -->
+  <rect x="832" y="446" width="100" height="20" rx="4" fill="#1a0f35" stroke="#a78bfa" stroke-width="1"/>
+  <text x="882" y="460" text-anchor="middle" font-size="8.5" fill="#c4b5fd">Sources: ai.txt</text>
+  <text x="882" y="475" text-anchor="middle" font-size="9.5" fill="#9b8ac4">Grounded answer</text>
+  <text x="882" y="487" text-anchor="middle" font-size="9.5" fill="#9b8ac4">+ citations</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- VERTICAL CONNECTOR: Vector Store ↔ Retrieval -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <!-- Dashed vertical link from Vector Store (ingestion) down to Retrieval (query) -->
+  <line x1="694" y1="262" x2="694" y2="298" stroke="#4fc3f7" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="694" y1="298" x2="506" y2="298" stroke="#718096" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="506" y1="298" x2="506" y2="372" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <circle cx="694" cy="298" r="4" fill="#718096"/>
+  <circle cx="506" cy="298" r="4" fill="#718096"/>
+  <text x="600" y="294" text-anchor="middle" font-size="9.5" fill="#718096">indexed vectors used at query time</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TECH STACK FOOTER -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="30" y="540" width="1140" height="60" rx="10" fill="#0d1117" stroke="#2a2f45" stroke-width="1"/>
+  <text x="600" y="558" text-anchor="middle" font-size="11" font-weight="600" fill="#4a5568">TECH STACK</text>
+
+  <!-- Badges -->
+  <rect x="60" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#4fc3f7" stroke-width="1"/>
+  <text x="120" y="579" text-anchor="middle" font-size="10" fill="#4fc3f7">OpenAI Embeddings</text>
+
+  <rect x="195" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#4fc3f7" stroke-width="1"/>
+  <text x="255" y="579" text-anchor="middle" font-size="10" fill="#4fc3f7">gpt-4o-mini</text>
+
+  <rect x="330" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#a78bfa" stroke-width="1"/>
+  <text x="390" y="579" text-anchor="middle" font-size="10" fill="#a78bfa">LangChain</text>
+
+  <rect x="465" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#a78bfa" stroke-width="1"/>
+  <text x="525" y="579" text-anchor="middle" font-size="10" fill="#a78bfa">NumPy Vector Math</text>
+
+  <rect x="600" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#34d399" stroke-width="1"/>
+  <text x="660" y="579" text-anchor="middle" font-size="10" fill="#34d399">Cosine Similarity</text>
+
+  <rect x="735" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#34d399" stroke-width="1"/>
+  <text x="795" y="579" text-anchor="middle" font-size="10" fill="#34d399">Recursive Chunking</text>
+
+  <rect x="870" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#fbbf24" stroke-width="1"/>
+  <text x="930" y="579" text-anchor="middle" font-size="10" fill="#fbbf24">Source Attribution</text>
+
+  <rect x="1005" y="564" width="120" height="22" rx="5" fill="#1a2535" stroke="#fbbf24" stroke-width="1"/>
+  <text x="1065" y="579" text-anchor="middle" font-size="10" fill="#fbbf24">Python 3.10+</text>
+
+</svg>

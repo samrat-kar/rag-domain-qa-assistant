@@ -1,12 +1,31 @@
 import os
-from typing import List, Dict, Any
+from pathlib import Path
+from typing import List, Dict, Any, Optional
 import numpy as np
 from langchain_openai import OpenAIEmbeddings
+
+# Maps source filename stems to human-readable domain labels.
+DOMAIN_MAP: Dict[str, str] = {
+    "artificial_intelligence": "AI",
+    "biotechnology": "Biotechnology",
+    "climate_science": "Climate Science",
+    "quantum_computing": "Quantum Computing",
+    "space_exploration": "Space Exploration",
+    "sustainable_energy": "Sustainable Energy",
+    "sample_documents": "General",
+}
+
+
+def extract_domain(source: str) -> str:
+    """Derive a domain label from a source filename."""
+    stem = Path(source).stem
+    return DOMAIN_MAP.get(stem, stem.replace("_", " ").title())
 
 
 class VectorDB:
     """
     A simple in-memory vector database wrapper using OpenAI embeddings.
+    Supports domain-aware metadata and optional domain filtering at search time.
     """
 
     def __init__(self, collection_name: str = None, embedding_model: str = None):
@@ -90,14 +109,16 @@ class VectorDB:
             chunks = self.chunk_text(content)
             print(f"  Document {doc_idx + 1}: split into {len(chunks)} chunks")
 
+            domain = extract_domain(metadata.get("source", f"doc_{doc_idx}"))
             for chunk_idx, chunk in enumerate(chunks):
                 chunk_id = f"doc_{doc_idx}_chunk_{chunk_idx}"
                 all_chunks.append(chunk)
                 all_ids.append(chunk_id)
-                # Store serializable metadata only.
+                # Store serializable metadata including the domain label.
                 all_metadatas.append({
                     "doc_index": doc_idx,
                     "chunk_index": chunk_idx,
+                    "domain": domain,
                     **{k: str(v) for k, v in metadata.items()},
                 })
 
@@ -119,22 +140,27 @@ class VectorDB:
 
         print(f"Documents added to vector database ({len(all_chunks)} chunks total)")
 
-    def search(self, query: str, n_results: int = 5) -> Dict[str, Any]:
+    def list_domains(self) -> List[str]:
+        """Return sorted list of distinct domain labels currently indexed."""
+        return sorted({m.get("domain", "Unknown") for m in self._metadatas})
+
+    def search(self, query: str, n_results: int = 5,
+               domain_filter: Optional[str] = None) -> Dict[str, Any]:
         """
         Search for similar documents in the vector database.
 
         Args:
             query: Search query
             n_results: Number of results to return
+            domain_filter: If set, restrict results to chunks from this domain label
+                           (e.g. "AI", "Biotechnology"). Use list_domains() to see options.
 
         Returns:
-            Dictionary containing search results with keys: 'documents', 'metadatas', 'distances', 'ids'
+            Dictionary with keys: 'documents', 'metadatas', 'distances', 'ids'
         """
         count = len(self._documents)
         if count == 0:
             return {"documents": [[]], "metadatas": [[]], "distances": [[]], "ids": [[]]}
-
-        n_results = min(n_results, count)
 
         # Embed user query with same model space as document vectors.
         query_embedding = np.array(
@@ -142,18 +168,27 @@ class VectorDB:
             dtype=np.float32,
         )
 
-        # Cosine similarity
+        # Cosine similarity across all indexed chunks.
         doc_norms = np.linalg.norm(self._embeddings, axis=1) + 1e-12
         query_norm = np.linalg.norm(query_embedding) + 1e-12
         similarities = (self._embeddings @ query_embedding) / (doc_norms * query_norm)
 
-        # Get top-k indices by similarity (descending)
-        top_indices = np.argsort(similarities)[::-1][:n_results]
+        # Apply domain filter by masking non-matching chunks before ranking.
+        if domain_filter:
+            mask = np.array(
+                [m.get("domain") == domain_filter for m in self._metadatas],
+                dtype=bool,
+            )
+            similarities = np.where(mask, similarities, -2.0)
+
+        # Get top-k indices by similarity (descending), excluding masked entries.
+        sorted_indices = np.argsort(similarities)[::-1]
+        top_indices = [i for i in sorted_indices if similarities[i] > -2.0][:n_results]
 
         top_docs = [self._documents[i] for i in top_indices]
         top_metas = [self._metadatas[i] for i in top_indices]
         top_ids = [self._ids[i] for i in top_indices]
-        # Convert similarity to distance for compatibility with vector DB style output.
+        # Store as cosine distance (1 - similarity) for consistency with ChromaDB output.
         top_distances = [float(1.0 - similarities[i]) for i in top_indices]
 
         return {
