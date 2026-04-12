@@ -2,6 +2,12 @@
 
 This project implements a **Retrieval-Augmented Generation (RAG)** assistant that answers questions using a custom local document set. The core deliverable is a working pipeline that performs document ingestion, chunking, embedding, retrieval, and grounded response generation with OpenAI models.
 
+## Links
+
+- Publication: [Practical RAG for Domain QA: An In-Memory, OpenAI-Embedded Retrieval-Augmented Generation Assistant](https://app.readytensor.ai/publications/practical-rag-for-domain-qa-an-in-memory-openai-embedded-retrieval-augmented-generation-assistant-TIgCxjV1jspX)
+
+---
+
 ## 1) Purpose and Objectives
 
 ### Purpose
