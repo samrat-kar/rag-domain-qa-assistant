@@ -1,4 +1,4 @@
-# An In-Memory OpenAI-Embedded RAG Domain Question-Answering Assistant
+# An In-Memory OpenAI-Embedded RAG Domain QnA Assistant
 
 This project implements a **Retrieval-Augmented Generation (RAG)** assistant that answers questions using a custom local document set. The core deliverable is a working pipeline that performs document ingestion, chunking, embedding, retrieval, and grounded response generation with OpenAI models.
 
