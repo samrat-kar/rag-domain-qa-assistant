@@ -1,4 +1,4 @@
-# RAG Question-Answering Assistant (Final Submission)
+# RAG Question-Answering Assistant
 
 This project implements a **Retrieval-Augmented Generation (RAG)** assistant that answers questions using a custom local document set. The core deliverable is a working pipeline that performs document ingestion, chunking, embedding, retrieval, and grounded response generation with OpenAI models.
 
@@ -203,4 +203,15 @@ Then test predefined and interactive questions.
 
 This project provides a compact, understandable RAG baseline for document-grounded QA. It is practical for learning and small-domain assistant prototypes, and it establishes a clean foundation for future extensions (persistent vector DB, reranking, quantitative evaluation, and service deployment).
 
+---
 
+## License
+
+Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — free for non-commercial use with attribution.
+
+---
+
+## Contact
+
+**Maintainer:** Samrat Kar  
+**GitHub:** [samrat-kar](https://github.com/samrat-kar)
